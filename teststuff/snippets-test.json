@@ -1,0 +1,12 @@
+{"snippets":[
+            { "name" : "random timer", "code" :
+            [  "def rtime():",
+               "    rt =  randint(1,8)*.5",
+               "    nap = sleep(rt)",
+               "    return nap" 
+            ]}
+             
+            ,{  "name" : "Zen", "code" :
+            [  "import this"]}                
+               
+]}

@@ -1,0 +1,111 @@
+{"snippets":[
+            { "name" : "HELP", "code" :[              " ",
+              "Add a snippet name where it says: ",
+              "    name = \"<place name here>\"    ",
+              "replace: <place name here> with the snippet name.",
+              "---------",
+              "codes =''' ",
+              "<place code here> ",
+              "'''",
+              "replace: <place code here> with snippet multiline is of course fine.",
+              "This copies the original /nbextensions/snippets/snippets.json to the notebooks local ",
+              "directory as snippets-temp.json"
+            ]}
+            ,{ "name" : "Add Snippet", "code" :[
+            "!cp /home/jack/.local/share/jupyter/nbextensions/snippets/snippets.json teststuff/snippets-temp.json",
+            "name = \" <place name here>\" ",
+            "codes =\"\"\" ",
+            "<place code here> ",
+            "\"\"\" ",
+            "count = 0 ",
+            "for line in codes.split('\\n'): ",
+            "    if len(line) > 0: ",
+            "        count = count +1 ",
+            "print(count) ",
+            "f0 = open('teststuff/snippets-temp.json', 'r').readlines()",
+            "f1 = open('/home/jack/.local/share/jupyter/nbextensions/snippets/snippets.json', 'w')",
+            "for line in f0: ",
+            "    if line[0:2] != \"]}\": ",
+            "        f1.write(line) ",
+            "f1.write('            ,{ \"name\" : \"'+name+'\", \"code\" :[')",
+            "codes =codes.split(\"\\n\") ",
+            "cnt = 0 ",
+            "for line in codes: ",
+            "    if len(line) > 0: ",
+            "        cnt = cnt+1 ",
+            "        print (\"::\",cnt,line) ",
+            "        line = line.replace('\"','\\\\\"') ",
+            "        line = line.replace('\n','\\\\n') ",      
+            "        if cnt != count: ",
+            "            f1.write('              \"'+line+'\",\\n')",
+            "        if cnt == count: ",
+            "            f1.write('              \"'+line+'\"\\n')",
+            "f1.write('            ]}\\n')",
+            "f1.write(']}\\n') ",
+            "f1.close() "
+            ]}
+            ,{ "name" : "View snippet.jsons", "code" :[              " ",
+              "filein = '/home/jack/.local/share/jupyter/nbextensions/snippets/snippets.json'",
+              "import json",
+              "from pprint import pprint",
+              "with open(filein) as f:",
+              "    data = json.load(f)",
+              "pprint(data)"
+            ]}
+            ,{ "name" : "random pause", "code" :[              " ",
+              "from random import randint",
+              "from time import sleep",
+              "def rtime():",
+              "    rt =  randint(1,40)*.1",
+              "    nap = sleep(rt)",
+              "    return nap"
+            ]}
+            
+            ,{ "name" : "ignore numpy warnings", "code" :[              " ",
+              "import warnings",
+              "warnings.filterwarnings(\"ignore\", message=\"numpy.dtype size changed\")",
+              "warnings.filterwarnings(\"ignore\", message=\"numpy.ufunc size changed\")"
+            ]}
+            ,{ "name" : "Store Ext path", "code" :[              "\nimport os\nimport os.path\ntitle = \"mp4.list\"\nf= open(title,\"w\")\nf.close()\ncount=0\nfor dirpath, dirnames, filenames in os.walk(\"/home/jack/\"):",
+              "   for filename in [f for f in filenames if f.endswith(\".mp4\")]:",
+              "       count=count+1",
+              "       Path = os.path.join(dirpath, filename)",
+              "       with open(title, 'a') as outfile:",
+              "           path = Path+'\n'",
+              "           outfile.write(path)\n"
+            ]}
+            ,{ "name" : "FTS4 database", "code" :[              "import sqlite3",
+              "import re",
+              "import sys",
+              "import time",
+              "database = \"test.db\"",
+              "#database = \"junk2.db\"",
+              "conn = sqlite3.connect(database)",
+              "conn.text_factory = lambda x: unicode(x, \"utf-8\", \"ignore\")",
+              "c = conn.cursor()",
+              "c.execute(\"\"",
+              "CREATE VIRTUAL TABLE IF NOT EXISTS ipynb ",
+              "USING FTS4(file, content, description);",
+              "\"\")",
+              "conn.commit()",
+              "conn.close()"
+            ]}
+            
+            
+            ,{ "name" : "mkdir if/not exist", "code" :[              "import os",
+              "if not os.path.exists('teststuff'):",
+              "    os.makedirs('teststuff')"
+            ]}
+            ,{ "name" : "Get DirSize", "code" :[              "import os",
+              "f = open('sqlitedatabases.txt', 'r').readlines()",
+              "f0 = open('sqlitedatabases-size.txt', 'w')",
+              "for line in f:",
+              "    line = line.replace('",
+              "','')",
+              "    sz = os.path.getsize(line)",
+              "    sz=str(sz)",
+              "    f0.write(line+', '+sz+'",
+              "')",
+              "f0.close()"
+            ]}
+]}
